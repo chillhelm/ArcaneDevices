@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	Please see the license.html file included with this distribution for
+	attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="arcanedevice">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="350" height="450" />
+		</placement>
+		<sizelimits>
+			<minimum width="350" height="400" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<tooltip field="name" />
+		<playercontrol />
+		<sharable />
+		<nodelete />
+		<script file="ArcaneDevices/scripts/arcanedevice.lua" />
+		<sheetdata>
+			<sub_record_header name="header">
+				<class>arcanedevice_header</class>
+			</sub_record_header>
+
+			<frame_record_content_tabbed name="contentframe" />
+
+			<subwindow_record name="main">
+				<class>arcanedevice_main</class>
+			</subwindow_record>
+			<record_description name="description" source="text">
+				<anchored to="contentframe" position="over" />
+				<invisible />
+			</record_description>
+
+			<scrollbar_record>
+				<target>main</target>
+			</scrollbar_record>
+			<scrollbar_record>
+				<target>description</target>
+			</scrollbar_record>
+
+			<tabs_recordsheet>
+				<tab>
+					<icon>tab_main</icon>
+					<subwindow>main</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_notes</icon>
+					<subwindow>description</subwindow>
+				</tab>
+			</tabs_recordsheet>
+			
+			<viewerlist_recordsheet />
+
+			<resize_recordsheet />
+			<close_recordsheet />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="arcanedevice_header">
+		<margins control="0,0,0,7" />
+		<script file="campaign/scripts/record_header.lua" />
+		<sheetdata>
+			<link_record_header>
+				<class>arcanedevice</class>
+			</link_record_header>
+
+			<anchor_record_header_right name="rightanchor" />
+			<icon_record_locked name="hardlocked" />
+			<button_record_locked name="locked" />
+
+			<string_record_name name="name">
+				<empty textres="library_recordtype_empty_arcanedevice" />
+			</string_record_name>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="arcanedevice_main">
+		
+		<margins control="0,0,0,2" />
+		<script file="ArcaneDevices/scripts/arcanedevice_main.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<label_column name="group_label">
+				<static textres="common_group" />
+			</label_column>
+			<string_columnh name="group"/>
+			<label_column name="weight_label">
+				<static textres="weapon_label_weight" />
+			</label_column>
+			<number_columnh name="weight" />
+			<label_column name="cost_label">
+				<static textres="weapon_label_cost" />
+			</label_column>
+			<string_columnh name="cost" />
+			<label_column name="maxpowerpoints_label">
+				<static>Max. PP</static>
+			</label_column>
+			<number_columnh name="maxpowerpoints"/>
+			
+			
+			<label_column name="power_label">
+				<static>Power</static>
+			</label_column>
+			<string_columnh name="powername">
+				<readonly/>
+			</string_columnh>
+			<referencelinkfield name="power">
+				<anchored to="powername" width="20" height="20">
+					<top offset="0" />
+					<right anchor="right" relation="relative" offset="-4" />
+				</anchored>
+			</referencelinkfield>
+			<label_column name="activationroll_label">
+				<static>Activation Roll</static>
+			</label_column>
+			<dice name="activationroll">
+				<frame offset="2,2,2,2"/>
+				<anchored width="30" height="30" to="activationroll_label">
+					<top offset="0"/>
+					<left offset="10" anchor="right"/>
+				</anchored>
+				<script>
+					function onDrop(x,y,dragdata)
+						if isReadOnly() then
+							return false;
+						end
+						if dragdata.getType() == "dice" then
+							reset();
+							newDie = dragdata.getDieList()[1];
+							setDice(newDie);
+							return true;
+						end
+						return false;
+					end
+				</script>
+			</dice>
+		</sheetdata>
+	</windowclass>
+</root>

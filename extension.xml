@@ -1,0 +1,20 @@
+<root version="2.0">
+	<properties>
+	<name>Arcane Devices</name>
+	<version>0.01</version>
+	
+	<author>Wilhelm Neubert</author>
+	<description>Basic Arcane Devices for Savage Worlds</description>
+	<ruleset>SavageWorlds</ruleset>
+	</properties>
+	<base>
+		
+		<includefile source="ArcaneDevices/record_arcanedevice.xml" />
+		<includefile source="ArcaneDevices/charsheet_inventory_arcanedevices.xml" />
+		<includefile source="ArcaneDevices/charsheet_inventory.xml" />
+		<includefile source="ArcaneDevices/template_itemlist_extensions.xml" />
+		<includefile source="ArcaneDevices/string_resources_arcanedevices.xml" />
+		<!-- This file is our main Lua file. You can name it what you want, but you must use xml restrictions in order to do that.-->
+		<script name="ArcaneDevices" file="ArcaneDevices/main.lua" />
+	</base>
+</root>

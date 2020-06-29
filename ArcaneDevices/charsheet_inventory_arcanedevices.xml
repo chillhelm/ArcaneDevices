@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+	Please see the license.html file included with this distribution for
+	attribution and copyright information.
+-->
+
+<root>
+	<template name="charinv_arcanedevicelist">
+		<inventorylist>
+			<datasource>.arcanedevices</datasource>
+			<class>charsheet_invitem_arcandedevice</class>
+			<acceptdrop>
+				<class>arcanedevice</class>
+				<field>*</field>
+			</acceptdrop>
+			<aftercreate>initializeEntry</aftercreate>
+			<script file="ArcaneDevices/scripts/charsheet_inventory_arcanedevicelist.lua"/>
+		</inventorylist>
+	</template>
+
+	<windowclass name="arcanedevicesinventory_subwindow">
+		<sheetdata>
+			<label_char_center>
+				<static textres="arcanedevices_inventory_title" />
+			</label_char_center>
+			
+			<charinv_header_rightanchor name="rightanchor" />
+			<charinv_header_idelete name="idelete_header" />
+			<charinv_header_shortcut name="shortcut_header" />
+			<charinv_header_carried name="carried_header" />
+			<charinv_header_weight name="weight_header" />
+			<charinv_header_currentPP name="currentPP_header" />
+			<charinv_header_name name="name_header" />
+			<charinv_header_count name="count_header" />
+
+			<charinv_arcanedevicelist name="inventorylist" />
+			<scrollbar_subwindow>
+				<anchored to="inventorylist"/>
+				<target>inventorylist</target>
+			</scrollbar_subwindow>
+
+			<button_iedit name="inventorylist_iedit">
+				<anchored to="inventorylist" position="aboveright" offset="6,5" />
+				<target>inventorylist</target>
+			</button_iedit>
+			<button_iadd name="inventorylist_iadd">
+				<anchored to="inventorylist_iedit" position="lefthigh" offset="6,0" />
+				<target>inventorylist</target>
+			</button_iadd>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charsheet_invitem_arcandedevice">
+		<margins control="0,0,0,5" />
+		<script file="ArcaneDevices/scripts/charsheet_inventory_arcanedeviceitem.lua"/>
+		<sheetdata>
+			<hidden_record_isidentified name="isidentified" />
+			<hn name="encumbered" />
+
+			<charinv_item_count name="count" />
+
+			<charinv_item_rightanchor name="rightanchor" />
+			<charinv_item_idelete name="idelete" />
+
+			<charinv_item_shortcut name="shortcut">
+				<class>arcanedevice</class>
+			</charinv_item_shortcut>
+			<charinv_item_carried name="carried" />
+			<charinv_item_weight name="weight">
+				<tabtarget prev="location" />
+			</charinv_item_weight>
+			
+			<charinv_item_currentPP name="currentPP">
+				<tabtarget next="maxpowerpoints" prev="nonid_name" />
+			</charinv_item_currentPP>
+			
+			<charinv_item_maxPP name="maxpowerpoints">
+				<tabtarget next="weight" prev="currentPP" />
+			</charinv_item_maxPP>
+			
+			<charinv_item_encumbered name="encumbered_icon" />
+
+			<charinv_item_name name="name">
+				<tabtarget next="nonid_name" prev="count" />
+			</charinv_item_name>
+			<charinv_item_nonid_name name="nonid_name">
+				<tabtarget next="location" prev="name" />
+			</charinv_item_nonid_name>
+
+			<charinv_item_description name="description" />
+		</sheetdata>
+	</windowclass>
+	<template name="charinv_item_currentPP">
+		<number>
+			<min>0</min>
+			<anchored width="20" height="20">
+				<top offset="2" />
+				<right parent="rightanchor" anchor="left" relation="relative" offset="-40" />
+			</anchored>
+			<center />
+			<script>
+				function onValueChanged()
+					setMaxValue(getDatabaseNode().getChild("..maxpowerpoints").getValue())
+				end
+			</script>
+		</number>
+	</template>
+	<template name="charinv_item_maxPP">
+		<number>
+			<anchored>
+				<top   parent="currentPP" anchor="top"  relation="absolute" offset="0" />
+				<bottom parent="currentPP" anchor="bottom" relation="absolute" offset="0" />
+				<left parent="currentPP" anchor="right" relation="relative" offset="5" />
+			</anchored>
+			<center />
+			<readonly />
+			<script>
+			function onInit()
+				widgetSeparator = addTextWidget("sheettext", "/")
+				widgetSeparator.setPosition("left", -5, -1)
+			end
+		</script>
+		</number>
+		
+	</template>
+	<template name="charinv_header_currentPP">
+		<charinv_header_base>
+			<center />
+			<static textres="charinv_header_currentPP_string" />
+			<anchored width="40"/>
+		</charinv_header_base>
+	</template>
+	<template name="charinv_header_power">
+		<charinv_header_base>
+			<center />
+			<static textres="charinv_header_power_string" />
+			<anchored width="40"/>
+		</charinv_header_base>
+	</template>
+	<template name="charinv_header_power">
+		<charinv_header_base>
+			<center />
+			<static textres="charinv_header_power_string" />
+			<anchored width="30"/>
+		</charinv_header_base>
+	</template>
+	<template name="charinv_header_actdie">
+		<charinv_header_base>
+			<center />
+			<static textres="charinv_header_actdie_string" />
+			<anchored width="30"/>
+		</charinv_header_base>
+	</template>
+</root>

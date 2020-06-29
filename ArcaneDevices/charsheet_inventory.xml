@@ -1,0 +1,12 @@
+<root>
+	<windowclass name="charsheet_inventory" merge="join">
+		<sheetdata>
+			<button_inventorytab name="arcanedevices_button">
+				<labelres>arcanedevices_button_string</labelres>
+			</button_inventorytab>
+			<subwindow_inventory name="arcanedevices_sub">
+				<class>arcanedevicesinventory_subwindow</class>
+			</subwindow_inventory>
+		</sheetdata>
+	</windowclass>
+</root>

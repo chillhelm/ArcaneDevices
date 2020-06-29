@@ -1,0 +1,13 @@
+<root>
+	<template name="button_item_arcanedevice">
+			<masterindex_button_list>
+				<anchored/>
+				<state textres="button_item_arcanedevice_string" />
+				<script>
+					function onButtonPress()
+						activate("item", "arcanedevice", "reference.arcanedevice")
+					end
+				</script>
+			</masterindex_button_list>
+	</template>
+</root>

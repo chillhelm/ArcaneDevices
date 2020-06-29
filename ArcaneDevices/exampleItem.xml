@@ -1,0 +1,33 @@
+<root>
+	<reference>
+		<arcanedevice>
+			<testdevice>
+				<public />
+				<activationroll type="dice">d6</activationroll>
+				<carried type="number">1</carried>
+				<cost type="string">1</cost>
+				<count type="number">1</count>
+				<currentPP type="number">0</currentPP>
+				<encumbered type="number">0</encumbered>
+				<group type="string">Wand</group>
+				<isidentified type="number">1</isidentified>
+				<locked type="number">1</locked>
+				<maxPowerpoints type="number">2</maxPowerpoints>
+				<maxpowerpoints type="number">20</maxpowerpoints>
+				<name type="string">Firewand</name>
+				<power type="windowreference">
+					<class>powerdesc</class>
+					<recordname>reference.powers.barrier@SWADE Player Guide</recordname>
+				</power>
+				<powername type="string">Barrier</powername>
+				<registeredPower type="string">charsheet.id-00001.powerlist.id-00009</registeredPower>
+				<registeredSkill type="string">charsheet.id-00001.skills.id-00014</registeredSkill>
+				<shortcutclass type="string">arcanedevice</shortcutclass>
+				<text type="formattedtext">
+					<p></p>
+				</text>
+				<weight type="number">1</weight>
+			</testdevice>
+		</arcanedevice>
+	</reference>
+</root>

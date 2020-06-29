@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<root>
+	<string name="button_item_arcanedevice_string">Arcane Device</string>
+	<string name="item_label_arcane_device_power">Power</string>
+	<string name="charinv_header_currentPP_string">PP</string>
+	<string name="charinv_header_power_string">Power</string>
+	<string name="charinv_header_actdie_string">Act. Die</string>
+	<string name="arcanedevices_inventory_title">Arcane Devices</string>
+	<string name="arcanedevices_button_string">Arcane Dev.</string>
+	<string name="arcanedevices_button_string">Arcane Dev.</string>
+</root>
