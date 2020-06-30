@@ -9,4 +9,5 @@
 	<string name="arcanedevices_inventory_title">Arcane Devices</string>
 	<string name="arcanedevices_button_string">Arcane Dev.</string>
 	<string name="arcanedevices_button_string">Arcane Dev.</string>
+  <string name="item_label_create_arcanedevice">Create Arcane Device</string>
 </root>

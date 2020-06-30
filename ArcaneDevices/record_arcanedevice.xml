@@ -107,7 +107,6 @@
 				<static>Power</static>
 			</label_column>
 			<string_columnh name="powername">
-				<readonly/>
 			</string_columnh>
 			<referencelinkfield name="power">
 				<anchored to="powername" width="20" height="20">
@@ -115,30 +114,38 @@
 					<right anchor="right" relation="relative" offset="-4" />
 				</anchored>
 			</referencelinkfield>
+      <line_column name="divider" />
+      <label_column name="activationtype_label">
+        <static>Activation</static>
+      </label_column>
+      <comboboxc name="activationtype">
+        <anchored height="20">
+          <top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+          <left offset="97" />
+          <right offset="-5" />
+        </anchored>
+        <script file="ArcaneDevices/scripts/activationtype_combobox.lua"/>
+      </comboboxc>
 			<label_column name="activationroll_label">
 				<static>Activation Roll</static>
 			</label_column>
 			<dice name="activationroll">
-				<frame offset="2,2,2,2"/>
+        <frame offset="2,2,2,2">
+          <name>diebox</name>
+        </frame>
+        <script file="ArcaneDevices/scripts/record_arcanedevice_activationroll.lua" />
 				<anchored width="30" height="30" to="activationroll_label">
 					<top offset="0"/>
 					<left offset="10" anchor="right"/>
 				</anchored>
-				<script>
-					function onDrop(x,y,dragdata)
-						if isReadOnly() then
-							return false;
-						end
-						if dragdata.getType() == "dice" then
-							reset();
-							newDie = dragdata.getDieList()[1];
-							setDice(newDie);
-							return true;
-						end
-						return false;
-					end
-				</script>
 			</dice>
+      <label_column name="skillname_label">
+        <static>Skill</static>
+        <invisible />
+      </label_column>
+      <string_columnh name="skillname">
+        <invisible />
+      </string_columnh>
 		</sheetdata>
 	</windowclass>
 </root>

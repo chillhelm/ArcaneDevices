@@ -11,6 +11,7 @@ function onInit()
 			node.getChild("isequipment").onUpdate = update
 		end
 	end
+	node.createChild("activationtype","string").onUpdate=update
 	update()
 end
 
@@ -21,13 +22,36 @@ end
 
 function update()
 	local bReadOnly = isReadOnlyState()
+
+	local node = getDatabaseNode()
 	
 	group.update(bReadOnly)
 	weight.update(bReadOnly)
 	cost.update(bReadOnly)
 	maxpowerpoints.update(bReadOnly)
-	activationroll.setEnabled(not bReadOnly)
-	powername.update(bReadOnly)
+	activationtype_str = node.getChild("activationtype").getValue()
+	activationroll.setEnabled((not bReadOnly) and (activationtype_str=="Device Internal"))
+	activationtype.update(bReadOnly)
+	skillname.setEnabled((not bReadOnly) and (activationtype_str=="Skill"))
+	skillname.update(bReadOnly)
+	if(activationtype_str=="Device Internal") then
+		activationroll.setVisible(true)
+		activationroll_label.setVisible(true)
+		skillname_label.setVisible(false)
+		skillname.setVisible(false)
+	elseif(activationtype_str=="Skill") then
+		activationroll.setVisible(false)
+		activationroll_label.setVisible(false)
+		skillname_label.setVisible(true)
+		skillname.setVisible(true)
+	else
+		activationroll.setVisible(false)
+		activationroll_label.setVisible(false)
+		skillname_label.setVisible(false)
+		skillname.setVisible(false)
+	end
+
+	--powername.update(bReadOnly)
 end
 
 function onDrop(x,y,dropdata)
@@ -49,3 +73,4 @@ function onDrop(x,y,dropdata)
 	arcaneDevice.getChild("powername").setValue(nodeSource.getChild("name").getValue());
 	return true
 end
+

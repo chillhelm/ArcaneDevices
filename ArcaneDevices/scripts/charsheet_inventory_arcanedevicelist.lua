@@ -5,7 +5,7 @@
 
 function onInit()
 	super.onInit()
-	registerMenuItem(Interface.getString("item_label_create_mundane"), "insert", 5)
+	registerMenuItem(Interface.getString("item_label_create_arcanedevice"), "insert", 5)
 end
 
 function onCarriedChanged(nodeCarried)
@@ -50,13 +50,15 @@ end
 
 function grantCharacterADPower(character, arcanedevice)
 	local deviceName = arcanedevice.getChild("name").getValue();
-	
-	local skilllist = character.getChild("skills");
-	local newSkillNode = DB.createChild(skilllist);
-	newSkillNode.createChild("name","string").setValue(deviceName);
-	newSkillNode.createChild("skill","dice").setValue(arcanedevice.getChild("activationroll").getValue());
-	newSkillNode.createChild("link","windowreference").setValue("arcanedevice",arcanedevice.getPath());
-	arcanedevice.createChild("registeredSkill","string").setValue(newSkillNode.getPath());
+	local activationtype = arcanedevice.getChild("activationtype").getValue()
+	if(activationtype == "Device Internal") then
+		local skilllist = character.getChild("skills");
+		local newSkillNode = DB.createChild(skilllist);
+		newSkillNode.createChild("name","string").setValue(deviceName);
+		newSkillNode.createChild("skill","dice").setValue(arcanedevice.getChild("activationroll").getValue());
+		newSkillNode.createChild("link","windowreference").setValue("arcanedevice",arcanedevice.getPath());
+		arcanedevice.createChild("registeredSkill","string").setValue(newSkillNode.getPath());
+	end
 	
 	local powerlink = arcanedevice.getChild("power");
 	local powerlinktype, powerpath = powerlink.getValue();
@@ -67,7 +69,14 @@ function grantCharacterADPower(character, arcanedevice)
 		DB.copyNode(power,newPowerNode);
 		newPowerNode.getChild("name").setValue(deviceName);
 		newPowerNode.getChild("link").setValue(powerlinktype,powerpath);
-		newPowerNode.createChild("traittype").setValue("["..deviceName.."]");
+		if (activationtype == "Device Internal") then
+			newPowerNode.createChild("traittype").setValue("["..deviceName.."]");
+		elseif (activationtype == "Skill") then
+			local skillname = arcanedevice.getChild("skillname").getValue()
+			newPowerNode.createChild("traittype").setValue("["..skillname.."]");
+		else
+			newPowerNode.createChild("traittype").setValue(activationtype);
+		end
 		arcanedevice.createChild("registeredPower","string").setValue(newPowerNode.getPath());
 	end
 end
