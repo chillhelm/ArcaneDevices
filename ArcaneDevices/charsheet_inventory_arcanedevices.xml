@@ -72,6 +72,7 @@
 			</charinv_item_weight>
 			
 			<charinv_item_currentPP name="currentPP">
+        <frame name="bonus" offset="2,2,2,2"></frame>
 				<tabtarget next="maxpowerpoints" prev="nonid_name" />
 			</charinv_item_currentPP>
 			

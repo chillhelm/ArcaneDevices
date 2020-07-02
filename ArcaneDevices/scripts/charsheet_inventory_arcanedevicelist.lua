@@ -69,6 +69,12 @@ function grantCharacterADPower(character, arcanedevice)
 		DB.copyNode(power,newPowerNode);
 		newPowerNode.getChild("name").setValue(deviceName);
 		newPowerNode.getChild("link").setValue(powerlinktype,powerpath);
+		local damageexpr = power.getChild("damage").getValue()
+		if(damageexpr ~= "") then
+			local sActorType = CharacterManager.getActorType(character)
+			WeaponManager.convertStringToDamageDice(sActorType, character, newPowerNode)
+		end
+		newPowerNode.getChild("damagedice")
 		if (activationtype == "Device Internal") then
 			newPowerNode.createChild("traittype").setValue("["..deviceName.."]");
 		elseif (activationtype == "Skill") then

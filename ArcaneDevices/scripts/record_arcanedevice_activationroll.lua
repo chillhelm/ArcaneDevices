@@ -12,19 +12,14 @@ function onMenuSelection(i,j)
 		dice=""
 		if j==1 then
 			dice="d4"
-			Debug.chat(dice)
 		elseif j==2 then
 			dice="d6"
-			Debug.chat(dice)
 		elseif j==3 then
 			dice="d8"
-			Debug.chat(dice)
 		elseif j==4 then
 			dice="d10"
-			Debug.chat(dice)
 		elseif j==5 then
 			dice="d12"
-			Debug.chat(dice)
 		end
 		setDice({dice})
 	end
