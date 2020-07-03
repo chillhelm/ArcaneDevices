@@ -1,7 +1,7 @@
-<root version="2.0">
+<root version="3.0">
 	<properties>
 	<name>Arcane Devices</name>
-	<version>0.04</version>
+	<version>0.05</version>
 	
 	<author>Wilhelm Neubert</author>
 	<description>Basic Arcane Devices for Savage Worlds</description>
