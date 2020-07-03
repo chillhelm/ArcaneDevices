@@ -61,20 +61,25 @@ function grantCharacterADPower(character, arcanedevice)
 	end
 	
 	local powerlink = arcanedevice.getChild("power");
+	if not powerlink then
+		return
+	end
 	local powerlinktype, powerpath = powerlink.getValue();
 	if(powerlinktype=="powerdesc" and powerpath~="") then
 		local power = DB.getRoot().getChild(powerpath);
 		local powerlist = character.createChild("powerlist");
 		local newPowerNode = DB.createChild(powerlist);
 		DB.copyNode(power,newPowerNode);
-		newPowerNode.getChild("name").setValue(deviceName);
+		powername = arcanedevice.getChild("powername").getValue()
+		newPowerNode.getChild("name").setValue(powername.." ["..deviceName.."]");
 		newPowerNode.getChild("link").setValue(powerlinktype,powerpath);
-		local damageexpr = power.getChild("damage").getValue()
-		if(damageexpr ~= "") then
-			local sActorType = CharacterManager.getActorType(character)
-			WeaponManager.convertStringToDamageDice(sActorType, character, newPowerNode)
+		if(power.getChild("damage")) then
+			local damageexpr = power.getChild("damage").getValue()
+			if(damageexpr ~= "") then
+				local sActorType = CharacterManager.getActorType(character)
+				WeaponManager.convertStringToDamageDice(sActorType, character, newPowerNode)
+			end
 		end
-		newPowerNode.getChild("damagedice")
 		if (activationtype == "Device Internal") then
 			newPowerNode.createChild("traittype").setValue("["..deviceName.."]");
 		elseif (activationtype == "Skill") then
@@ -88,15 +93,23 @@ function grantCharacterADPower(character, arcanedevice)
 end
 
 function removeCharacterADPower(character, arcanedevice)
-	local registeredPowerNode = arcanedevice.getChild("registeredPower")
-	if registeredPowerNode then
-		DB.deleteNode(registeredPowerNode.getValue());
-		DB.deleteNode(registeredPowerNode)
+	local registeredPowerNodePath = arcanedevice.getChild("registeredPower")
+	if registeredPowerNodePath then
+		local registeredPowerNode = DB.getRoot().getChild(registeredPowerNodePath.getValue())
+		DB.deleteNode(registeredPowerNodePath)
+		local registeredPowerChar = registeredPowerNode.getChild("...")
+		if registeredPowerNode and registeredPowerChar.getPath() == character.getPath() then
+			DB.deleteNode(registeredPowerNode);
+		end
 	end
-	local registeredSkillNode = arcanedevice.getChild("registeredSkill")
-	if registeredSkillNode then
-		DB.deleteNode(registeredSkillNode.getValue());
-		DB.deleteNode(registeredSkill);
+	local registeredSkillNodePath = arcanedevice.getChild("registeredSkill")
+	if registeredSkillNodePath then
+		local registeredSkillNode = DB.getRoot().getChild(registeredSkillNodePath.getValue())
+		DB.deleteNode(registeredSkillNodePath)
+		local registeredSkillChar = registeredSkillNode.getChild("...")
+		if registeredSkillNode and registeredSkillChar.getPath() == character.getPath() then
+			DB.deleteNode(registeredSkillNode);
+		end
 	end
 end
 

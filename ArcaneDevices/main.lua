@@ -38,6 +38,7 @@ function onInit()
 	table.insert(item_record_info.aPlayerListButtons,"button_item_arcanedevice")
 	LibraryData.setRecordTypeInfo("item", item_record_info)
 	LibraryData.setListView("item","arcanedevice",aArcaneDeviceListView)
+
 end
 
 function arcaneDeviceDeletion(deviceToDelete)
@@ -46,15 +47,23 @@ function arcaneDeviceDeletion(deviceToDelete)
 end
 
 function removeCharacterADPower(character, arcanedevice)
-	local registeredPowerNode = arcanedevice.getChild("registeredPower")
-	if registeredPowerNode then
-		DB.deleteNode(registeredPowerNode.getValue());
-		DB.deleteNode(registeredPowerNode)
+	local registeredPowerNodePath = arcanedevice.getChild("registeredPower")
+	if registeredPowerNodePath then
+		local registeredPowerNode = DB.getRoot().getChild(registeredPowerNodePath.getValue())
+		DB.deleteNode(registeredPowerNodePath)
+		local registeredPowerChar = registeredPowerNode.getChild("...")
+		if registeredPowerNode and registeredPowerChar.getPath() == character.getPath() then
+			DB.deleteNode(registeredPowerNode);
+		end
 	end
-	local registeredSkillNode = arcanedevice.getChild("registeredSkill")
-	if registeredSkillNode then
-		DB.deleteNode(registeredSkillNode.getValue());
-		DB.deleteNode(registeredSkill);
+	local registeredSkillNodePath = arcanedevice.getChild("registeredSkill")
+	if registeredSkillNodePath then
+		local registeredSkillNode = DB.getRoot().getChild(registeredSkillNodePath.getValue())
+		DB.deleteNode(registeredSkillNodePath)
+		local registeredSkillChar = registeredSkillNode.getChild("...")
+		if registeredSkillNode and registeredSkillChar.getPath() == character.getPath() then
+			DB.deleteNode(registeredSkillNode);
+		end
 	end
 end
 
@@ -65,7 +74,10 @@ function arcaneDeviceRenamed(arcanedevice_name)
 		local powernode = DB.findNode(registeredPowerNode.getValue())
 		if powernode then
 			powernode.getChild("name").setValue(arcanedevice_name.getValue());
-			powernode.getChild("traittype").setValue("["..arcanedevice_name.getValue().."]");
+			local activationtype = arcanedevice.getChild("activationtype").getValue()
+			if(activationtype == "Device Internal") then
+				powernode.getChild("traittype").setValue("["..arcanedevice_name.getValue().."]");
+			end
 		end
 	end
 	
