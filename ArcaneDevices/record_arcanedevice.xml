@@ -98,7 +98,7 @@
 			</label_column>
 			<string_columnh name="cost" />
 			<label_column name="maxpowerpoints_label">
-				<static>Max. PP</static>
+				<static textres="arcanedevices_maxpowerpoints_label"></static>
 			</label_column>
 			<number_columnh name="maxpowerpoints"/>
 			
@@ -116,7 +116,7 @@
 			</referencelinkfield>
       <line_column name="divider" />
       <label_column name="activationtype_label">
-        <static>Activation</static>
+        <static textres="arcanedevices_actiavtiontype_label"></static>
       </label_column>
       <comboboxc name="activationtype">
         <anchored height="20">
@@ -127,7 +127,7 @@
         <script file="ArcaneDevices/scripts/activationtype_combobox.lua"/>
       </comboboxc>
 			<label_column name="activationroll_label">
-				<static>Activation Roll</static>
+				<static textres="arcanedevice_activation_roll_label"></static>
 			</label_column>
 			<dice name="activationroll">
         <frame offset="2,2,2,2">
@@ -140,7 +140,7 @@
 				</anchored>
 			</dice>
       <label_column name="skillname_label">
-        <static>Skill</static>
+        <static textres="arcane_device_skill_label"></static>
         <invisible />
       </label_column>
       <string_columnh name="skillname">

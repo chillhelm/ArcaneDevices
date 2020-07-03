@@ -11,4 +11,8 @@
 	<string name="arcanedevices_button_string">Arcane Dev.</string>
   <string name="item_label_create_arcanedevice">Create Arcane Device</string>
   <string name="item_grouped_title_arcanedevice">Arcane Devices</string>
+  <string name="arcanedevice_activation_roll_label">Activation Roll</string>
+  <string name="arcane_device_skill_label">Skill</string>
+  <string name="arcanedevices_actiavtiontype_label">Activation</string>
+  <string name="arcanedevices_maxpowerpoints_label">Max. PP</string>
 </root>
