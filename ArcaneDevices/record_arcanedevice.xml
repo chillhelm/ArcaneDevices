@@ -9,10 +9,10 @@
 	<windowclass name="arcanedevice">
 		<frame>recordsheet</frame>
 		<placement>
-			<size width="350" height="450" />
+			<size width="500" height="450" />
 		</placement>
 		<sizelimits>
-			<minimum width="350" height="400" />
+			<minimum width="450" height="400" />
 			<dynamic />
 		</sizelimits>
 		<minimize>minimized_item</minimize>
@@ -103,30 +103,10 @@
 			<number_columnh name="maxpowerpoints"/>
 			
 			
-			<label_column name="power_label">
-				<static>Power</static>
-			</label_column>
-			<string_columnh name="powername">
-			</string_columnh>
-			<referencelinkfield name="power">
-				<anchored to="powername" width="20" height="20">
-					<top offset="0" />
-					<right anchor="right" relation="relative" offset="-4" />
-				</anchored>
-			</referencelinkfield>
-      <line_column name="divider" />
-      <label_column name="activationtype_label">
-        <static textres="arcanedevices_actiavtiontype_label"></static>
-      </label_column>
-      <comboboxc name="activationtype">
-        <anchored height="20">
-          <top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
-          <left offset="97" />
-          <right offset="-5" />
-        </anchored>
-        <script file="ArcaneDevices/scripts/activationtype_combobox.lua"/>
-      </comboboxc>
 			<label_column name="activationroll_label">
+        <anchored>
+          <top parent="columnanchor" relation="relative" anchor="bottom" offset="18"/>
+        </anchored>
 				<static textres="arcanedevice_activation_roll_label"></static>
 			</label_column>
 			<dice name="activationroll">
@@ -134,18 +114,176 @@
           <name>diebox</name>
         </frame>
         <script file="ArcaneDevices/scripts/record_arcanedevice_activationroll.lua" />
-				<anchored width="30" height="30" to="activationroll_label">
-					<top offset="0"/>
-					<left offset="10" anchor="right"/>
+				<anchored width="30" height="30">
+					<top parent="activationroll_label" offset="-4"/>
+					<left parent="activationroll_label" offset="12" anchor="right"/>
 				</anchored>
 			</dice>
-      <label_column name="skillname_label">
+      <line_column name="divider" />
+			<label_column name="power_label">
+        <anchored>
+          <top parent="columnanchor" relation="relative" anchor="bottom" offset="7"/>
+        </anchored>
+				<static>Power</static>
+			</label_column>
+      <frame_char name="powersframe">
+        <anchored>
+          <top parent="columnanchor" relation="relative" anchor="bottom" offset="5" />
+          <left offset="0" />
+          <right offset="-1" />
+          <bottom offset="-11"/>
+        </anchored>
+      </frame_char>
+      <list_sw name="powers">
+        <anchored>
+          <top anchor="top" parent="powersframe" offset="1" />
+          <left anchor="left" parent="powersframe" offset="1" />
+          <right anchor="right" parent="powersframe" offset="1" />
+          <bottom anchor="bottom" parent="powersframe" offset="1" />
+        </anchored>
+        <datasource>.powerlist</datasource>
+        <class>ad_power</class>
+        <allowcreate merge="delete" />
+        <allowdelete merge="delete" />
+        <acceptdrop>
+          <class>powerdesc</class>
+          <field>name</field>
+          <field>powerpoints</field>
+          <field>range</field>
+          <field>duration</field>
+          <field>damage</field>
+          <field>damagetype</field>
+          <field>armorpiercing</field>
+          <field>effect</field>
+          <callback>powerDropped</callback>
+        </acceptdrop>
+        <aftercreate>initializePower</aftercreate>
+        <linkfield>link</linkfield>
+        <localref>
+          <class>powerdesc</class>
+        </localref>
+        <script file="charsheet/scripts/charsheet_localref.lua"/>
+        <script file="ArcaneDevices/scripts/ad_powers.lua"/>
+        <sortby>
+          <control>name</control>
+        </sortby>
+      </list_sw>
+      <scrollbar>
+        <anchored to="powers"/>
+        <target>powers</target>
+      </scrollbar>
+    </sheetdata>
+	</windowclass>
+  <windowclass name="ad_power">
+    <margins control="0,3,0,7" />
+    <script file="ArcaneDevices/scripts/ad_power.lua"/>
+    <sheetdata>
+      <hn name="locked" />
+      <hs name="masternode"/>
+      <hs name="wilddie"/>
+      <hn name="fumble">
+        <default>1</default>
+      </hn>
+
+      <anchor_listitem_column name="leftanchor" />
+      <anchor_listitem_column_right name="rightanchor" />
+      <button_listitem_column_delete name="idelete">
+        <anchored>
+          <top offset="8" />
+          <right relation="relative" />
+        </anchored>
+      </button_listitem_column_delete>
+
+      <pc_power_link name="link" />
+
+      <weapon_damageframe name="damageframe" />
+      <weapon_damagedice name="damagedice" />
+      <weapon_damagebonus name="damagebonus" />
+
+      <maxpowerpoints name="powerpoint_max" source="power.max">
+        <anchored>
+          <top offset="4" />
+          <right parent="rightanchor" anchor="left" relation="relative" offset="-8" />
+        </anchored>
+        <slashseparator />
+      </maxpowerpoints>
+      <ammoused name="powerpoint_current" source="power.current">
+        <anchored>
+          <top offset="4" />
+          <right parent="rightanchor" anchor="left" relation="relative" offset="-17" />
+        </anchored>
+      </ammoused>
+      <usepower_button name="powerpointslabel">
+        <anchored>
+          <top offset="6" />
+          <right parent="rightanchor" anchor="left" relation="relative" offset="-7" />
+        </anchored>
+      </usepower_button>
+
+      <comboboxc name="activationtype">
+        <default>Device Internal</default>
+        <anchored height="20" width="120">
+          <top offset="6"/>
+          <right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+        </anchored>
+        <listdirection mergerule="replace">down</listdirection>
+        <script file="ArcaneDevices/scripts/activationtype_combobox.lua"/>
+      </comboboxc>
+      <label name="activationtype_label">
+        <static textres="arcanedevices_actiavtiontype_label"/>
+        <anchored>
+          <top offset="6"/>
+          <right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+        </anchored>
+      </label>
+      <label name="skillname_label">
         <static textres="arcane_device_skill_label"></static>
         <invisible />
-      </label_column>
+        <anchored>
+          <top parent="activationtype_label" anchor="bottom" offset="10"/>
+          <right parent="activationtype_label" anchor="right"/>
+        </anchored>
+      </label>
       <string_columnh name="skillname">
         <invisible />
+				<anchored>
+					<top offset="8" parent="activationtype" anchor="bottom"/>
+					<left offset="0" anchor="left" parent="activationtype"/>
+          <right anchor="left" parent="powerpoint_current"/>
+        </anchored>
       </string_columnh>
-		</sheetdata>
-	</windowclass>
+      <hn name="traitcount" />
+      <!--<attack_trait name="trait" />-->
+      <power_traittype name="traittype" />
+      <!--<attack_apply name="apply" />-->
+      <attack_name name="name">
+        <script>
+          function onGainFocus()
+          window.effect.updateState(true)
+          end
+          function onLoseFocus()
+          super.onLoseFocus()
+          window.effect.updateState()
+          end
+        </script>
+      </attack_name>
+
+      <pc_power_range name="range" />
+      <pc_power_powerpoints name="powerpoints" />
+      <pc_power_duration name="duration" />
+
+      <record_stringline_h name="effect">
+        <anchored>
+          <top parent="name" anchor="bottom" relation="relative" offset="12" />
+          <left parent="name" />
+          <right offset="-35" />
+        </anchored>
+        <script>
+          function onTab()
+          return EffectManager.defaultAutoCompleteEffect(self, ">")
+          end
+        </script>
+      </record_stringline_h>
+    </sheetdata>
+  </windowclass>
 </root>
