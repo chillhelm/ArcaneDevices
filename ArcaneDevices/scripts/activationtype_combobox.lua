@@ -18,6 +18,12 @@ function onInit()
 		setComboBoxReadOnly(true)
 	end
 	bInit = true
+	local acttypenode = nodeSrc.getChild("activationtype")
+	if acttypenode then
+		if acttypenode.getValue()==nil then
+			acttypenode.setValue("Device Internal")
+		end
+	end
 end
 
 function initializeItems()

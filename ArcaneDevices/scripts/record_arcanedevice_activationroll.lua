@@ -6,7 +6,12 @@ function onInit()
 	registerMenuItem("D8","d8labeled",3,3)
 	registerMenuItem("D10","d10labeled",3,4)
 	registerMenuItem("D12","d12labeled",3,5)
+	node = self.getDatabaseNode()
+	if(node.getValue() == nil)then
+		self.setDice({"d4"})
+	end
 end
+
 function onMenuSelection(i,j)
 	if(i==3) then
 		dice=""
