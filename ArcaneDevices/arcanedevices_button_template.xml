@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<root>
+	<template name="button_add_arcanedevice">
+		<buttoncontrol insertbefore="filter_sharedonly">
+			<anchored to="rightanchor" width="20" height="20">
+				<top />
+				<right anchor="left" relation="relative" offset="-5" />
+			</anchored>
+			<icon normal="button_add_arcanedevice" pressed="button_add_arcanedevice_down" />
+			<tooltip textres="item_button_add_arcanedevice" />
+			<script>
+				function onButtonPress()
+					local node = DB.createNode("arcanedevices").createChild()
+					if node then
+						DB.setValue(node, "catname", "string", Interface.getString("item_grouped_title_arcanedevice"))
+						local w = Interface.openWindow("arcanedevice", node)
+						w.header.subwindow.name.setFocus()
+					end
+				end
+			</script>
+            <invisible />
+		</buttoncontrol>
+	</template>
+</root>

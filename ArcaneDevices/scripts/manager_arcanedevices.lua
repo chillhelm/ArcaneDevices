@@ -24,6 +24,8 @@ function onInit()
 	
 	table.insert(item_record_info.aDataMap,"arcanedevice")
 	table.insert(item_record_info.aDataMap, "reference.arcanedevice")
+	table.insert(item_record_info.aDataMap,"arcanedevices")
+	table.insert(item_record_info.aDataMap, "reference.arcanedevices")
 	
 	old_fRecordDisplayClass = item_record_info.fRecordDisplayClass
 	old_fIsRecordDisplayClass = item_record_info.fIsRecordDisplayClass
@@ -38,6 +40,7 @@ function onInit()
 		end
 	table.insert(item_record_info.aGMListButtons,"button_item_arcanedevice")
 	table.insert(item_record_info.aPlayerListButtons,"button_item_arcanedevice")
+    table.insert(item_record_info.aGMEditButtons,"button_add_arcanedevice")
 	LibraryData.setRecordTypeInfo("item", item_record_info)
 	LibraryData.setListView("item","arcanedevice",aArcaneDeviceListView)
 
@@ -78,6 +81,13 @@ end
 
 function isArcaneDevice(vRecord, vDefault)
 	
+    if not vRecord then
+        return false
+    end
+    local sPath =  vRecord.getPath()
+    if sPath and string.find(sPath,"arcanedevice") then
+        return true
+    end
 	return vRecord and vRecord.getChild("power") and vRecord.getChild("activationroll");
 end
 

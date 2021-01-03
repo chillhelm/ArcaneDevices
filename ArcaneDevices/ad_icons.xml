@@ -1,0 +1,4 @@
+<root>
+    <icon name="button_add_arcanedevice" file="ArcaneDevices/graphics/button_add_arcanedevice.png" />
+    <icon name="button_add_arcanedevice_down" file="ArcaneDevices/graphics/button_add_arcanedevice.png" />
+</root>

@@ -14,6 +14,8 @@
 		<includefile source="ArcaneDevices/charsheet_inventory.xml" />
 		<includefile source="ArcaneDevices/template_itemlist_extensions.xml" />
 		<includefile source="ArcaneDevices/string_resources_arcanedevices.xml" />
+        <includefile source="ArcaneDevices/arcanedevices_button_template.xml" />
+        <includefile source="ArcaneDevices/ad_icons.xml" />
 		<!-- This file is our main Lua file. You can name it what you want, but you must use xml restrictions in order to do that.-->
 		<script name="ArcaneDevicesManager" file="ArcaneDevices/scripts/manager_arcanedevices.lua" />
 	</base>

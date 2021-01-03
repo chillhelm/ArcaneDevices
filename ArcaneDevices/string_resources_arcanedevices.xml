@@ -15,4 +15,5 @@
   <string name="arcane_device_skill_label">Skill</string>
   <string name="arcanedevices_actiavtiontype_label">Activation</string>
   <string name="arcanedevices_maxpowerpoints_label">Max. PP</string>
+  <string name="item_button_add_arcanedevice">Add Arcane Device</string>
 </root>
