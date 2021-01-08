@@ -22,7 +22,7 @@ function onInit()
 	
 	item_record_info = LibraryData.getRecordTypeInfo("item");
 	
-	table.insert(item_record_info.aDataMap,1,"arcanedevices")
+	table.insert(item_record_info.aDataMap,4,"arcanedevices")
 	table.insert(item_record_info.aDataMap, "reference.arcanedevices")
     item_record_info.nExport = 4
     
