@@ -22,10 +22,10 @@ function onInit()
 	
 	item_record_info = LibraryData.getRecordTypeInfo("item");
 	
-	table.insert(item_record_info.aDataMap,"arcanedevice")
-	table.insert(item_record_info.aDataMap, "reference.arcanedevice")
-	table.insert(item_record_info.aDataMap,"arcanedevices")
+	table.insert(item_record_info.aDataMap,1,"arcanedevices")
 	table.insert(item_record_info.aDataMap, "reference.arcanedevices")
+    item_record_info.nExport = 4
+    
 	
 	old_fRecordDisplayClass = item_record_info.fRecordDisplayClass
 	old_fIsRecordDisplayClass = item_record_info.fIsRecordDisplayClass
@@ -33,8 +33,16 @@ function onInit()
 			if(isArcaneDevice(vNode)) then
 				return "arcanedevice";
 			end
-			return old_fRecordDisplayClass(vNode);
+            local sTemp = old_fRecordDisplayClass(vNode);
+			return sTemp
 		end
+    old_fLibDataSWGetItemRecordDisplayClass = LibraryDataSW.getItemRecordDisplayClass
+    LibraryDataSW.getItemRecordDisplayClass = function (vNode) 
+            if(isArcaneDevice(vNode)) then
+                return "Arcane Device";
+            end
+            return old_fLibDataSWGetItemRecordDisplayClass(vNode)
+        end
 	item_record_info.fIsRecordDisplayClass = function (sClass)
 			return sClass == "arcanedevice" or old_fIsRecordDisplayClass(sClass);
 		end

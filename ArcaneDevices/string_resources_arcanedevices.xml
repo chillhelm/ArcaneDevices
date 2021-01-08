@@ -9,6 +9,7 @@
 	<string name="arcanedevices_inventory_title">Arcane Devices</string>
 	<string name="arcanedevices_button_string">Arcane Dev.</string>
 	<string name="arcanedevices_button_string">Arcane Dev.</string>
+    <string name="item_catname_arcanedevice">Aarcane Device</string>
   <string name="item_label_create_arcanedevice">Create Arcane Device</string>
   <string name="item_grouped_title_arcanedevice">Arcane Devices</string>
   <string name="arcanedevice_activation_roll_label">Activation Roll</string>
