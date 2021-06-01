@@ -89,10 +89,12 @@ end
 
 function isArcaneDevice(vRecord, vDefault)
 	
+    --Debug.chat("isArcaneDevice", vRecord)
     if not vRecord then
         return false
     end
     local sPath =  vRecord.getPath()
+    --Debug.chat("sPath", sPath)
     if sPath and string.find(sPath,"arcanedevice") then
         return true
     end
