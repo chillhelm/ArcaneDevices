@@ -104,26 +104,26 @@
 			
 			
 			<label_column name="activationroll_label">
-        <anchored>
-          <top parent="columnanchor" relation="relative" anchor="bottom" offset="18"/>
-        </anchored>
+                <anchored>
+                  <top parent="columnanchor" relation="relative" anchor="bottom" offset="18"/>
+                </anchored>
 				<static textres="arcanedevice_activation_roll_label"></static>
 			</label_column>
 			<dice name="activationroll">
-        <frame offset="2,2,2,2">
-          <name>diebox</name>
-        </frame>
-        <script file="ArcaneDevices/scripts/record_arcanedevice_activationroll.lua" />
-				<anchored width="30" height="30">
-					<top parent="activationroll_label" offset="-4"/>
-					<left parent="activationroll_label" offset="12" anchor="right"/>
-				</anchored>
-			</dice>
-      <line_column name="divider" />
-			<label_column name="power_label">
-        <anchored>
-          <top parent="columnanchor" relation="relative" anchor="bottom" offset="7"/>
-        </anchored>
+                <frame offset="2,2,2,2">
+                  <name>diebox</name>
+                </frame>
+                <script file="ArcaneDevices/scripts/record_arcanedevice_activationroll.lua" />
+                <anchored width="30" height="30">
+                    <top parent="activationroll_label" offset="-4"/>
+                    <left offset="97"/>
+                </anchored>
+            </dice>
+            <line_column name="divider" />
+            <label_column name="power_label">
+                <anchored>
+                  <top parent="columnanchor" relation="relative" anchor="bottom" offset="7"/>
+                </anchored>
 				<static>Power</static>
 			</label_column>
       <frame_char name="powersframe">
