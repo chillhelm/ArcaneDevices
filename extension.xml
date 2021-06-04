@@ -5,7 +5,10 @@
 	
 	<author>Wilhelm Neubert</author>
 	<description>Basic Arcane Devices for Savage Worlds</description>
-	<ruleset>SavageWorlds</ruleset>
+    <ruleset><name>SavageWorlds</name></ruleset>
+    <ruleset><name>SWADE</name></ruleset>
+    <ruleset><name>SWD</name></ruleset>
+    <ruleset><name>PFSW</name></ruleset>
 	</properties>
 	<base>
 		
