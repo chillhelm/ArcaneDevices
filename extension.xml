@@ -8,7 +8,7 @@
     <ruleset><name>SavageWorlds</name></ruleset>
     <ruleset><name>SWADE</name></ruleset>
     <ruleset><name>SWD</name></ruleset>
-    <ruleset><name>PFSW</name></ruleset>
+    <ruleset><name>SWPF</name></ruleset>
 	</properties>
 	<base>
 		
