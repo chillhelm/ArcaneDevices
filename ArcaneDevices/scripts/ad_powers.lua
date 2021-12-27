@@ -22,7 +22,7 @@ function powerDropped(nodeSource, win, draginfo, x, y)
 end
 
 function onSortCompare(w1, w2)
-	return ListManager.sortCompareEntriesWithSubentries(w1, w2)
+	return ListManagerSW.sortCompareEntriesWithSubentries(w1, w2)
 end
 
 function onAfterCreate(win)
